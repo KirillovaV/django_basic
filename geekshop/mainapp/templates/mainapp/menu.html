@@ -1,0 +1,14 @@
+{% block menu %}
+<div class="header clearfix">
+    <a href="{% url 'main' %}" class="logo"></a>
+    <ul class="menu">
+        {% block menu_urls %}
+        <li><a href="{% url 'main' %}">домой</a></li>
+        <li><a href="{% url 'products' %}">продукты</a></li>
+        <li><a href="{% url 'contact' %}">контакты</a></li>
+        {% endblock %}
+    </ul>
+    <a href="#" class="search"></a>
+    <a href="#" class="basket"></a>
+</div>
+{% endblock %}
