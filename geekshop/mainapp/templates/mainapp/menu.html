@@ -4,7 +4,7 @@
     <ul class="menu">
         {% block menu_urls %}
         <li><a href="{% url 'main' %}">домой</a></li>
-        <li><a href="{% url 'products' %}">продукты</a></li>
+        <li><a href="{% url 'products:index' %}">продукты</a></li>
         <li><a href="{% url 'contact' %}">контакты</a></li>
         {% endblock %}
     </ul>
