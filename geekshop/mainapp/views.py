@@ -4,8 +4,7 @@ from mainapp.models import Product, ProductCategory
 
 def main(request):
     title = 'Главная'
-    products = Product.objects.all()
-    content = {'title': title, 'products': products}
+    content = {'title': title}
     return render(request, 'mainapp/index.html', content)
 
 
