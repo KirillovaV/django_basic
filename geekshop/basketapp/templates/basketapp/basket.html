@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            {{ title|title }}
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/font-awesome/css/font-awesome.css' %}">
+</head>
+<body>
+    <div class="container">
+        {% block content %}
+        <h2>Корзина</h2>
+            {% for item in basket %}
+                <div class="block">
+                    <p>{{ item.product.name }}</p>
+                    <p>Цена {{ item.product.price }}</p>
+                    <p>Количество {{ item.quantity }}</p>
+                    <a href="{% url 'basket:remove' item.pk %}">Удалить</a>
+                </div>
+            {% endfor %}
+        {% endblock %}
+    </div>
+</body>
+</html>

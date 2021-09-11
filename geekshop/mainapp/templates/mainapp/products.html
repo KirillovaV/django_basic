@@ -10,17 +10,12 @@
 <body>
 	<div class="container">
 		<div class="hero-white">
-			{% include 'mainapp/menu.html' %}
+			{% include 'mainapp/includes/menu.html' %}
 		</div>
 
 		<div class="details">
 			<div class="links clearfix">
-				<ul class="links-menu">
-					<li><a href="#" class="active">все</a></li>
-					{% for category in categories %}
-						<li><a href="#">{{ category.name }}</a></li>
-					{% endfor %}
-				</ul>
+				 {% include 'mainapp/includes/inc_categories_menu.html' %}
 			</div>
 
 			<div class="details-products">
@@ -107,7 +102,7 @@
 
 	</div>	
 
-    {% include 'mainapp/footer.html' %}
+    {% include 'mainapp/includes/footer.html' %}
 
 </body>
 </html>
