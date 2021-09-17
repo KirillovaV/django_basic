@@ -8,9 +8,10 @@
             {{ title|title }}
         {% endblock %}
     </title>
+
     {% block css %}
-        <link rel="stylesheet" href="{% static 'style.css' %}">
-        <link rel="stylesheet" href="{% static 'fonts/font-awesome/css/font-awesome.css' %}">
+	    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+	    <link rel="stylesheet" href="{% static 'fonts/font-awesome/css/font-awesome.css' %}">
     {% endblock %}
 
     {% block js %}
@@ -18,17 +19,9 @@
 </head>
 <body>
     <div class="container">
-
-    {% block menu %}
-        {% include 'mainapp/includes/menu.html' %}
-    {% endblock %}
-
-    {% block content %}
-    {% endblock %}
-
+        {% block content %}
+        {% endblock %}
     </div>
-
     {% include 'mainapp/includes/footer.html' %}
-
 </body>
 </html>
