@@ -1,9 +1,8 @@
 from django.contrib.auth.decorators import user_passes_test
-from django.shortcuts import HttpResponseRedirect, get_object_or_404
-from django.shortcuts import render
+from django.shortcuts import HttpResponseRedirect, get_object_or_404, render
 from django.urls import reverse
 from mainapp.models import ProductCategory
-from mainapp.forms import ProductCategoryEditForm
+from adminapp.forms import ProductCategoryEditForm
 
 
 @user_passes_test(lambda u: u.is_superuser)
