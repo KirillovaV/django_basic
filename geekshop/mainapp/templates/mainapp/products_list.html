@@ -1,5 +1,7 @@
 {% extends 'mainapp/base.html' %}
 {% load static %}
+{% load tags %}
+
 {% block content %}
 <div class="hero-white">
     <div class="header clearfix">
@@ -33,7 +35,7 @@
             {% for product in products %}
                 <div class="block">
                     <a href="{% url 'products:product' product.pk %}">
-                    <img src="/media/{{ product.image }}" alt="product">
+                    <img src="{{ product.image|media_folder_products }}" alt="product">
                         <div class="text">
                             <img src="{% static 'img/icon-hover.png' %}" alt="hover">
                             <h4>{{ product.name }}</h4>

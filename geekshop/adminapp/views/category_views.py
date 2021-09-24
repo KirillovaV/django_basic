@@ -1,11 +1,13 @@
 from django.contrib.auth.decorators import user_passes_test
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.shortcuts import HttpResponseRedirect, get_object_or_404, render
-from django.urls import reverse, reverse_lazy
+from django.shortcuts import HttpResponseRedirect
+# from django.shortcuts import get_object_or_404, render
+# from django.urls import reverse
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from mainapp.models import ProductCategory
-from adminapp.forms import ProductCategoryEditForm
+# from adminapp.forms import ProductCategoryEditForm
 
 
 class CategoriesListView(ListView):

@@ -1,8 +1,10 @@
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import HttpResponseRedirect, get_object_or_404, render
 from django.urls import reverse
+from django.views.generic import DetailView
 from mainapp.models import ProductCategory, Product
 from adminapp.forms import ProductEditForm
+
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -59,16 +61,21 @@ def product_update(request, pk):
     return render(request, 'adminapp/product_update.html', content)
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def product_read(request, pk):
-    title = 'продукт/подробнее'
-    product = get_object_or_404(Product, pk=pk)
+class ProductView(DetailView):
+    model = Product
+    template_name = 'adminapp/product_read.html'
 
-    content = {
-        'title': title,
-        'object': product,
-    }
-    return render(request, 'adminapp/product_read.html', content)
+
+# @user_passes_test(lambda u: u.is_superuser)
+# def product_read(request, pk):
+#     title = 'продукт/подробнее'
+#     product = get_object_or_404(Product, pk=pk)
+#
+#     content = {
+#         'title': title,
+#         'object': product,
+#     }
+#     return render(request, 'adminapp/product_read.html', content)
 
 
 @user_passes_test(lambda u: u.is_superuser)

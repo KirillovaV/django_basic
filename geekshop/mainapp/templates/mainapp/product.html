@@ -1,5 +1,7 @@
 {% extends 'mainapp/base.html' %}
 {% load static %}
+{% load tags %}
+
 {% block content %}
 <div class="hero-white">
     <div class="header clearfix">
@@ -13,7 +15,7 @@
         <div class="details-products">
             <div class="details-slider">
                 <div class="slider-product">
-                    <img src="/media/{{ product.image }}" alt="{{ product.short_desc }}">
+                    <img src="{{ product.image|media_folder_products }}" alt="{{ product.short_desc }}">
                 </div>
                 <div class="slider-control">
 <!--                    <div class="block">-->
