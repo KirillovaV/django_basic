@@ -1,10 +1,9 @@
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import HttpResponseRedirect, get_object_or_404, render
 from django.urls import reverse
-from django.views.generic import DetailView
+from django.views.generic import DetailView, DeleteView
 from mainapp.models import ProductCategory, Product
 from adminapp.forms import ProductEditForm
-
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -61,7 +60,7 @@ def product_update(request, pk):
     return render(request, 'adminapp/product_update.html', content)
 
 
-class ProductView(DetailView):
+class ProductReadView(DetailView):
     model = Product
     template_name = 'adminapp/product_read.html'
 
@@ -78,18 +77,30 @@ class ProductView(DetailView):
 #     return render(request, 'adminapp/product_read.html', content)
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def product_delete(request, pk):
-    title = 'продукт/удаление'
-    product = get_object_or_404(Product, pk=pk)
+class ProductDeleteView(DeleteView):
+    model = Product
+    template_name = 'adminapp/product_delete.html'
 
-    if request.method == 'POST':
-        product.is_active = False
-        product.save()
-        return HttpResponseRedirect(reverse('admin:products', args=[product.category.pk]))
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.is_active = False
+        self.object.save()
 
-    content = {
-        'title': title,
-        'product_to_delete': product,
-    }
-    return render(request, 'adminapp/product_delete.html', content)
+        return HttpResponseRedirect(reverse('admin:products', args=[self.object.category.pk]))
+
+
+# @user_passes_test(lambda u: u.is_superuser)
+# def product_delete(request, pk):
+#     title = 'продукт/удаление'
+#     product = get_object_or_404(Product, pk=pk)
+#
+#     if request.method == 'POST':
+#         product.is_active = False
+#         product.save()
+#         return HttpResponseRedirect(reverse('admin:products', args=[product.category.pk]))
+#
+#     content = {
+#         'title': title,
+#         'product_to_delete': product,
+#     }
+#     return render(request, 'adminapp/product_delete.html', content)
