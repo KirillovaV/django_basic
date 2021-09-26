@@ -1,9 +1,21 @@
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import HttpResponseRedirect, get_object_or_404, render
-from django.urls import reverse
-from django.views.generic import DetailView, DeleteView
+from django.urls import reverse, reverse_lazy
+from django.utils.decorators import method_decorator
+from django.views import View
+from django.views.generic import DetailView, DeleteView, ListView, CreateView, UpdateView
 from mainapp.models import ProductCategory, Product
 from adminapp.forms import ProductEditForm
+
+
+# class ProductsView(ListView):
+#     model = Product
+#     template_name = 'adminapp/products.html'
+#
+#     @method_decorator(user_passes_test(lambda u: u.is_superuser))
+#     def dispatch(self, *args, **kwargs):
+#         self.queryset = Product.objects.filter(category__pk=self.kwargs['pk']).order_by('name')
+#         return super().dispatch(*args, **kwargs)
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -15,9 +27,30 @@ def products(request, pk):
     content = {
         'title': title,
         'category': category,
-        'objects': product_list,
+        'object_list': product_list,
     }
     return render(request, 'adminapp/products.html', content)
+
+
+# class ProductCreateView(View):
+#     form_class = ProductEditForm
+#     template_name = 'adminapp/product_update.html'
+#
+#     def get(self, request, *args, **kwargs):
+#         category = get_object_or_404(ProductCategory, pk=self.kwargs['pk'])
+#         form = self.form_class(initial={'category': category})
+#         content = {
+#             'form': form,
+#             'category': category,
+#             'title': 'продукт/создание',
+#         }
+#         return render(request, self.template_name, content)
+#
+#     def post(self, request, *args, **kwargs):
+#         form = self.form_class(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return HttpResponseRedirect(reverse('admin:products', args=self.kwargs['pk']))
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -34,10 +67,16 @@ def product_create(request, pk):
         product_form = ProductEditForm(initial={'category': category})
 
     content = {'title': title,
-               'update_form': product_form,
+               'form': product_form,
                'category': category,
                }
     return render(request, 'adminapp/product_update.html', content)
+
+
+# class ProductUpdateView(UpdateView):
+#     model = Product
+#     template_name = 'adminapp/product_update.html'
+#     fields = '__all__'
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -54,7 +93,7 @@ def product_update(request, pk):
         edit_form = ProductEditForm(instance=edit_product)
 
     content = {'title': title,
-               'update_form': edit_form,
+               'form': edit_form,
                'category': edit_product.category,
                }
     return render(request, 'adminapp/product_update.html', content)
