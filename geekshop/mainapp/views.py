@@ -83,9 +83,10 @@ def products(request, pk=None, page=1):
 
 def product(request, pk):
     title = 'продукты'
+    links_menu = ProductCategory.objects.filter(is_active=True)
     content = {
         'title': title,
-        'links_menu': ProductCategory.objects.all(),
+        'links_menu': links_menu,
         'product': get_object_or_404(Product, pk=pk),
     }
     return render(request, 'mainapp/product.html', content)

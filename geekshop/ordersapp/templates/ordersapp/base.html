@@ -17,15 +17,14 @@
 
     {% block js %}
         <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
-        <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'js/orders_scripts.js' %}"></script>
     {% endblock %}
 
 </head>
 <body>
-    <div class="container">
+    <div class="order_container">
         {% block content %}
         {% endblock %}
     </div>
-    {% include 'mainapp/includes/footer.html' %}
 </body>
 </html>
