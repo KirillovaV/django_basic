@@ -6,11 +6,11 @@ class ProductCategory(models.Model):
     description = models.TextField(verbose_name='Описание', blank=True)
     is_active = models.BooleanField(verbose_name='Активна', default=True)
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         db_table = 'products_category'
+
+    def __str__(self):
+        return self.name
 
 
 class Product(models.Model):
@@ -23,8 +23,12 @@ class Product(models.Model):
     quantity = models.PositiveIntegerField(verbose_name='Количество на складе', default=0)
     is_active = models.BooleanField(verbose_name='Активен', default=True)
 
+    class Meta:
+        db_table = 'product'
+
     def __str__(self):
         return f'{self.name} {self.category.name}'
 
-    class Meta:
-        db_table = 'product'
+    @staticmethod
+    def get_items():
+        return Product.objects.filter(is_active=True).order_by('category', 'name')

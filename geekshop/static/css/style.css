@@ -1171,6 +1171,8 @@ html, body {
 	padding-right: 98px;
 	margin: -384px auto 0;
 	clear: both;
+	-webkit-box-sizing: unset;
+    box-sizing: unset;
 }
 .footer form {
 	position: relative;
@@ -1335,6 +1337,8 @@ td:first-child {
 
 .location {
 	padding: 0px 97px;
+	-webkit-box-sizing: unset;
+    box-sizing: unset;
 }
 .location-1 {
 	height: 368px;
