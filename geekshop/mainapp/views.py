@@ -133,7 +133,7 @@ def products(request, pk=None, page=1):
             products = get_products_orederd_by_price()
         else:
             category = get_category(pk)
-            products =  get_products_in_category_orederd_by_price(pk)
+            products = get_products_in_category_orederd_by_price(pk)
 
         paginator = Paginator(products, 2)
         try:
